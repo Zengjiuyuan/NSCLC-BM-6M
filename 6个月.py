@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import streamlit as st
@@ -36,13 +34,12 @@ Sex_mapper = {'male': 1, 'female': 2}
 Race_mapper = {"White": 1, "Black": 2, "Other": 3}
 Histological_Type_mapper = {"Adenocarcinoma": 1, "Squamous-cell carcinoma": 2} 
 T_mapper = {"T4": 4, "T1": 1, "T2": 2, "T3": 3}
-Liver_metastasis_mapper = {"No": 1, "Yes": 2}  
-Radiation_mapper = {"No": 1, "Yes": 2}      
+Liver_metastasis_mapper = {"No": 1, "Yes": 2}   
 Chemotherapy_mapper = {"No": 1, "Yes": 2}    
 Marital_status_mapper = {"Married/Partnered": 1, "Unmarried/Unstable Relationship": 2}
 
 def predict_Vital_status(Age, Sex, Race, Histological_Type,
-                         T, Liver_metastasis, Radiation,
+                         T, Liver_metastasis,
                          Chemotherapy, Marital_status):
     input_data = pd.DataFrame({
         'Age': [Age_mapper[Age]],
@@ -51,7 +48,6 @@ def predict_Vital_status(Age, Sex, Race, Histological_Type,
         'Histological_Type': [Histological_Type_mapper[Histological_Type]],
         'T': [T_mapper[T]],
         'Liver_metastasis': [Liver_metastasis_mapper[Liver_metastasis]],
-        'Radiation': [Radiation_mapper[Radiation]],
         'Chemotherapy': [Chemotherapy_mapper[Chemotherapy]],
         'Marital_status': [Marital_status_mapper[Marital_status]]
     })
@@ -70,7 +66,6 @@ Race = st.sidebar.selectbox("Race", options=list(Race_mapper.keys()))
 Histological_Type = st.sidebar.selectbox("Histological_Type", options=list(Histological_Type_mapper.keys()))
 T = st.sidebar.selectbox("T", options=list(T_mapper.keys()))
 Liver_metastasis = st.sidebar.selectbox("Liver metastasis", options=list(Liver_metastasis_mapper.keys()))
-Radiation = st.sidebar.selectbox("Radiation", options=list(Radiation_mapper.keys()))
 Chemotherapy = st.sidebar.selectbox("Chemotherapy", options=list(Chemotherapy_mapper.keys()))
 Marital_status = st.sidebar.selectbox("Marital_status", options=list(Marital_status_mapper.keys()))
 
@@ -82,7 +77,6 @@ if st.button("Predict"):
         Histological_Type=Histological_Type,
         T=T,
         Liver_metastasis=Liver_metastasis,
-        Radiation=Radiation,
         Chemotherapy=Chemotherapy,
         Marital_status=Marital_status
     )
